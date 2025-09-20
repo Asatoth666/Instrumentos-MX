@@ -16,7 +16,8 @@
             <ul>
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="productos.html">Productos</a></li>
-                <li><a href="nosotros.html">Sobre Nosotros</a></li>
+                <li><a href="nosotros.html">Historia</a></li>
+                <li><a href="mision-vision.html">Misión, Visión y Valores</a></li>
                 <li><a href="contacto.html">Contacto</a></li>
                 <li><a href="login.html">Iniciar Sesión</a></li>
                 <li><a href="registro.html">Registro</a></li>
@@ -35,7 +36,7 @@
 
 
     <!-- Sección destacada -->
-    <section class="destacados">
+    <section class="destacados" id="productos">
         <h2>Productos Destacados</h2>
         <div class="cards">
             <div class="card">
@@ -53,12 +54,31 @@
         </div>
     </section>
 
+    <!-- Redes Sociales -->
+    <section class="redes-sociales">
+        <h2>Síguenos en Redes Sociales</h2>
+        <ul>
+            <li><a href="https://facebook.com" target="_blank">Facebook</a></li>
+            <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
+            <li><a href="https://twitter.com" target="_blank">Twitter</a></li>
+        </ul>
+    </section>
+
+    <!-- Opiniones -->
+    <section class="opiniones">
+        <h2>Opiniones de Nuestros Clientes</h2>
+        <p>"Excelente calidad y servicio" - Juan Pérez</p>
+        <p>"Los mejores instrumentos que he comprado" - María López</p>
+    </section>
+
     <!-- Footer -->
     <footer>
         <p>© 2025 InstrumentosMX | Todos los derechos reservados</p>
+        <p>Número de visitas: <span id="contador-visitas">0</span></p>
     </footer>
 
     <script>
+        // Cambiador de fondo en Hero
         const hero = document.querySelector('.hero');
         const images = [
             'img/ecenario.jpg',
@@ -73,14 +93,21 @@
 
         function changeBackground() {
             hero.style.backgroundImage = `url(${images[current]})`;
-            current = (current + 1) % images.length; // reinicia en bucle
+            hero.style.backgroundSize = "cover";
+            hero.style.backgroundPosition = "center";
+            current = (current + 1) % images.length;
         }
 
-        // Cambia cada 5 segundos
         changeBackground();
         setInterval(changeBackground, 5000);
-    </script>
 
+        // Contador de visitas
+        const contadorVisitas = document.getElementById('contador-visitas');
+        let visitas = localStorage.getItem('visitas') || 0;
+        visitas++;
+        localStorage.setItem('visitas', visitas);
+        contadorVisitas.textContent = visitas;
+    </script>
 </body>
 
 </html>

@@ -256,3 +256,127 @@ p a:hover {
     z-index: 1;
     /* se queda detrás del texto */
 }
+
+/* Redes Sociales */
+.redes-sociales {
+    padding: 50px 20px;
+    background: #181818;
+    text-align: center;
+}
+
+.redes-sociales h2 {
+    color: #f4a261;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+.redes-sociales ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.redes-sociales a {
+    color: #e0e0e0;
+    font-size: 1.2em;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.redes-sociales a:hover {
+    color: #f4a261;
+}
+
+/* Opiniones */
+.opiniones {
+    padding: 50px 20px;
+    background: #121212;
+    text-align: center;
+}
+
+.opiniones h2 {
+    color: #f4a261;
+    margin-bottom: 30px;
+    font-size: 2em;
+}
+
+.opiniones p {
+    font-style: italic;
+    margin-bottom: 15px;
+    color: #ddd;
+    font-size: 1.1em;
+}
+
+/* Ajustes al contador en footer */
+footer p span {
+    font-weight: bold;
+    color: #f4a261;
+}
+
+/* Lista de valores */
+.valores-lista {
+    list-style: none;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0;
+    text-align: left;
+}
+
+.valores-lista li {
+    background: #1f1f1f;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    transition: transform 0.2s;
+}
+
+.valores-lista li span {
+    font-size: 1.5em;
+}
+
+.valores-lista li:hover {
+    transform: translateX(5px);
+    background: #2b2b2b;
+}
+
+/* Hero con video */
+.hero {
+    position: relative;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    overflow: hidden;
+}
+
+.hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* cubre toda la pantalla */
+    z-index: 0;
+}
+
+.hero .overlay {
+    position: relative;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.5); /* capa oscura encima del video */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
