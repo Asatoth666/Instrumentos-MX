@@ -3,36 +3,32 @@ session_start();
 include("conexion.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    $email    = trim($_POST['email']);
+    $email    = $_POST['email'];
     $password = $_POST['password'];
 
-    // 1️⃣ Validar formato de correo
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "<div style='color:red;'>Formato de correo inválido.</div>";
-        exit;
-    }
-
-    // 2️⃣ Buscar usuario en la base de datos
     $sql = "SELECT * FROM usuarios WHERE email = '$email'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         $usuario = $result->fetch_assoc();
 
-        // 3️⃣ Verificar contraseña
         if (password_verify($password, $usuario['contrasena'])) {
             $_SESSION['usuario_id'] = $usuario['id'];
             $_SESSION['nombre'] = $usuario['nombre'];
+            $_SESSION['rol'] = $usuario['rol']; // << guardamos el rol
 
-            // Login exitoso → redirigir a bienvenida.php
-            header("Location: bienvenida.php");
+            // Si es admin lo mandamos al panel de administración
+            if ($usuario['rol'] === 'admin') {
+                header("Location: admin_panel.php");
+            } else {
+                header("Location: bienvenida.php");
+            }
             exit;
         } else {
-            echo "<div style='color:red;'>Contraseña incorrecta.</div>";
+            echo "Contraseña incorrecta.";
         }
     } else {
-        echo "<div style='color:red;'>No existe un usuario con ese correo.</div>";
+        echo "No existe un usuario con ese correo.";
     }
 }
 ?>
