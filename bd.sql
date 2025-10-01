@@ -1,101 +1,72 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Servidor: 127.0.0.1
--- Tiempo de generación: 20-09-2025 a las 22:29:25
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
 -- Base de datos: `instrumentos_db`
---
+CREATE DATABASE IF NOT EXISTS `instrumentos_db`
+  DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `instrumentos_db`;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `instrumentos`
---
-
-CREATE TABLE `instrumentos` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(150) NOT NULL,
-  `descripcion` text DEFAULT NULL,
-  `categoria` varchar(100) DEFAULT NULL,
-  `precio` decimal(10,2) NOT NULL,
-  `stock` int(11) NOT NULL DEFAULT 0,
-  `imagen` varchar(255) DEFAULT NULL,
-  `fecha_agregado` timestamp NOT NULL DEFAULT current_timestamp(),
-  `marca` varchar(100) DEFAULT NULL,
-  `descuento` decimal(5,2) DEFAULT 0.00,
-  `estado` enum('activo','inactivo') DEFAULT 'activo'
+-- Tabla: categorias
+CREATE TABLE `categorias` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(100) NOT NULL,
+  `descripcion` TEXT DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nombre` (`nombre`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
+INSERT INTO `categorias` (`id`, `nombre`) VALUES
+(1, 'Guitarras'),
+(2, 'Bajos'),
+(3, 'Baterias'),
+(4, 'Teclados/Pianos'),
+(5, 'Violines');
 
---
--- Estructura de tabla para la tabla `usuarios`
---
-
+-- Tabla: usuarios
 CREATE TABLE `usuarios` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(100) NOT NULL,
-  `apellidoP` varchar(150) NOT NULL,
-  `apellidoM` varchar(150) NOT NULL,
-  `email` varchar(150) NOT NULL,
-  `contrasena` varchar(255) NOT NULL,
-  `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp(),
-  `rol` enum('usuario','admin') DEFAULT 'usuario'
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(100) NOT NULL,
+  `apellidoP` VARCHAR(150) NOT NULL,
+  `apellidoM` VARCHAR(150) NOT NULL,
+  `email` VARCHAR(150) UNIQUE NOT NULL,
+  `contrasena` VARCHAR(255) NOT NULL,
+  `fecha_registro` TIMESTAMP NOT NULL DEFAULT current_timestamp(),
+  `rol` ENUM('usuario','admin') DEFAULT 'usuario',
+  `token_recuperacion` VARCHAR(255) DEFAULT NULL,
+  `expira_token` DATETIME DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `usuarios`
---
+-- Tabla: instrumentos
+CREATE TABLE `instrumentos` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(150) NOT NULL,
+  `descripcion` TEXT DEFAULT NULL,
+  `categoria_id` INT UNSIGNED DEFAULT NULL,
+  `precio` DECIMAL(10,2) NOT NULL CHECK (`precio` >= 0),
+  `stock` INT UNSIGNED NOT NULL DEFAULT 0,
+  `imagen` VARCHAR(255) DEFAULT NULL,
+  `fecha_agregado` TIMESTAMP NOT NULL DEFAULT current_timestamp(),
+  `marca` VARCHAR(100) DEFAULT NULL,
+  `descuento` DECIMAL(5,2) DEFAULT 0.00 CHECK (`descuento` >= 0 AND `descuento` <= 100),
+  `estado` ENUM('activo','inactivo') DEFAULT 'activo',
+  PRIMARY KEY (`id`),
+  KEY `categoria_id` (`categoria_id`),
+  CONSTRAINT `instrumentos_ibfk_1` FOREIGN KEY (`categoria_id`) 
+    REFERENCES `categorias` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Índices para tablas volcadas
---
+-- Tabla: compras
+CREATE TABLE `compras` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `usuario_id` INT UNSIGNED NOT NULL,
+  `instrumento_id` INT UNSIGNED NOT NULL,
+  `cantidad` INT UNSIGNED NOT NULL CHECK (`cantidad` > 0),
+  `total` DECIMAL(10,2) NOT NULL CHECK (`total` >= 0),
+  `fecha` TIMESTAMP NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `usuario_id` (`usuario_id`),
+  KEY `instrumento_id` (`instrumento_id`),
+  CONSTRAINT `compras_ibfk_1` FOREIGN KEY (`usuario_id`) 
+    REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `compras_ibfk_2` FOREIGN KEY (`instrumento_id`) 
+    REFERENCES `instrumentos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Indices de la tabla `instrumentos`
---
-ALTER TABLE `instrumentos`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `instrumentos`
---
-ALTER TABLE `instrumentos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
