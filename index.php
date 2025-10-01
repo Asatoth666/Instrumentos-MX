@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -14,11 +17,19 @@
         <div class="logo">InstrumentosMX</div>
         <nav>
             <ul>
-                <li><a href="registro.html">Registrarse</a></li>
-                <li><a href="login.html">Iniciar Sesion</a></li>
                 <li><a href="productos.php">Productos</a></li>
                 <li><a href="nosotros.html">Sobre Nosotros</a></li>
                 <li><a href="contacto.html">Contacto</a></li>
+
+                <?php if (isset($_SESSION['usuario'])): ?>
+                    <!-- Si el usuario está logueado -->
+                    <li><a href="logout.php">Cerrar Sesión</a></li>
+                    <li style="color: yellow;">👋 Bienvenido, <?php echo $_SESSION['usuario']; ?></li>
+                <?php else: ?>
+                    <!-- Si NO hay sesión -->
+                    <li><a href="login.html">Iniciar Sesión</a></li>
+                    <li><a href="registro.html">Registro</a></li>
+                <?php endif; ?>
             </ul>
         </nav>
     </header>

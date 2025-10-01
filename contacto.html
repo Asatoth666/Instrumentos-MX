@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Contacto - InstrumentosMX</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>📩 Contáctanos</h1>
+        <nav>
+            <a href="index.html" class="btn">Inicio</a>
+            <a href="productos.php" class="btn">Ver Productos</a>
+            <a href="login.html" class="btn">Iniciar Sesión</a>
+        </nav>
+    </header>
+
+    <div class="contacto-container">
+        <h2>Estamos para ayudarte 🎶</h2>
+        <p>Si tienes dudas sobre algún instrumento, pedidos o soporte, puedes enviarnos un mensaje con el siguiente formulario.</p>
+
+        <form action="enviar_contacto.php" method="POST" class="contacto-form">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+
+            <button type="submit" class="btn">Enviar Mensaje</button>
+        </form>
+
+        <div class="info-contacto">
+            <h3>📍 Nuestra Tienda</h3>
+            <p>Av. Principal #123, CDMX, México</p>
+
+            <h3>📞 Teléfono</h3>
+            <p>+52 2711002318</p>
+
+            <h3>✉️ Correo</h3>
+            <p>soporte@instrumentosmx.com</p>
+        </div>
+    </div>
+</body>
+</html>

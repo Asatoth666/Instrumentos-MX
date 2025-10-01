@@ -11,7 +11,11 @@ include("conexion.php");
 $usuarios = $conn->query("SELECT id, nombre, email, rol FROM usuarios");
 
 // Consultar productos
-$instrumentos = $conn->query("SELECT id, nombre, categoria, precio, stock FROM instrumentos");
+$instrumentos = $conn->query("
+    SELECT i.id, i.nombre, i.precio, i.stock, c.nombre AS categoria
+    FROM instrumentos i
+    LEFT JOIN categorias c ON i.categoria_id = c.id
+");
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -58,29 +62,30 @@ $instrumentos = $conn->query("SELECT id, nombre, categoria, precio, stock FROM i
     </table>
 
     <h2>🎸 Instrumentos</h2>
-    <a href="agregar_instrumento.php" class="btn">Agregar Instrumento</a>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Categoría</th>
-            <th>Precio</th>
-            <th>Stock</th>
-            <th>Acciones</th>
-        </tr>
-        <?php while($i = $instrumentos->fetch_assoc()): ?>
-        <tr>
-            <td><?php echo $i['id']; ?></td>
-            <td><?php echo $i['nombre']; ?></td>
-            <td><?php echo $i['categoria']; ?></td>
-            <td>$<?php echo number_format($i['precio'],2); ?></td>
-            <td><?php echo $i['stock']; ?></td>
-            <td>
-                <a href="editar_instrumento.php?id=<?php echo $i['id']; ?>" class="btn btn-warning">Editar</a>
-                <a href="eliminar_instrumento.php?id=<?php echo $i['id']; ?>" class="btn btn-danger" onclick="return confirm('¿Seguro que deseas eliminar este producto?')">Eliminar</a>
-            </td>
-        </tr>
-        <?php endwhile; ?>
-    </table>
+<a href="agregar_instrumento.php" class="btn">Agregar Instrumento</a>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Categoría</th>
+        <th>Precio</th>
+        <th>Stock</th>
+        <th>Acciones</th>
+    </tr>
+    <?php while($i = $instrumentos->fetch_assoc()): ?>
+    <tr>
+        <td><?php echo $i['id']; ?></td>
+        <td><?php echo $i['nombre']; ?></td>
+        <td><?php echo $i['categoria']; ?></td>
+        <td>$<?php echo number_format($i['precio'],2); ?></td>
+        <td><?php echo $i['stock']; ?></td>
+        <td>
+            <a href="editar_instrumento.php?id=<?php echo $i['id']; ?>" class="btn btn-warning">Editar</a>
+            <a href="eliminar_instrumento.php?id=<?php echo $i['id']; ?>" class="btn btn-danger" onclick="return confirm('¿Seguro que deseas eliminar este producto?')">Eliminar</a>
+        </td>
+    </tr>
+    <?php endwhile; ?>
+</table>
+
 </body>
 </html>
