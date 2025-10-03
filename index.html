@@ -73,38 +73,75 @@
     </section>
 
     <footer>
-        <p>© 2025 InstrumentosMX | Todos los derechos reservados</p>
-        <p>Visitas: <span id="contador-visitas">0</span></p>
-    </footer>
+    <p>© 2025 InstrumentosMX | Todos los derechos reservados</p>
+    <p>Visitas: <span id="contador-visitas">0</span></p>
+</footer>
 
-    <script>
-        const hero = document.querySelector('.hero');
-        const images = [
-            'img/ecenario.jpg',
-            'img/guitarraacus.jpg',
-            'img/guitarraelect.jpg',
-            'img/bateria.jpg',
-            'img/piano.jpg',
-            'img/violin.jpg',
-        ];
+<script>
+    const hero = document.querySelector('.hero');
+    const images = [
+        'img/ecenario.jpg',
+        'img/guitarraacus.jpg',
+        'img/guitarraelect.jpg',
+        'img/bateria.jpg',
+        'img/piano.jpg',
+        'img/violin.jpg',
+    ];
 
-        let current = 0;
+    let current = 0;
 
-        function changeBackground() {
-            hero.style.backgroundImage = `url(${images[current]})`;
-            current = (current + 1) % images.length;
+    function changeBackground() {
+        hero.style.backgroundImage = `url(${images[current]})`;
+        current = (current + 1) % images.length;
+    }
+
+    // Cambia cada 5 segundos
+    changeBackground();
+    setInterval(changeBackground, 5000);
+
+    // Contador de visitas con CountAPI
+    (function () {
+        const el = document.getElementById('contador-visitas');
+        if (!el) return;
+
+        const NAMESPACE = 'instrumentosmx';
+        const KEY = 'visitas';
+        const HIT_URL = `https://api.countapi.xyz/hit/${NAMESPACE}/${KEY}`;
+        const GET_URL = `https://api.countapi.xyz/get/${NAMESPACE}/${KEY}`;
+        const STORAGE_KEY = `countapi_${NAMESPACE}_${KEY}`;
+
+        function show(value) {
+            el.textContent = value;
         }
 
-        // Cambia cada 5 segundos
-        changeBackground();
-        setInterval(changeBackground, 5000);
-
-        // Contador de visitas
-        const contadorVisitas = document.getElementById('contador-visitas');
-        let visitas = localStorage.getItem('visitas') || 0;
-        visitas++;
-        localStorage.setItem('visitas', visitas);
-        contadorVisitas.textContent = visitas;
+        if (localStorage.getItem(STORAGE_KEY)) {
+            // Ya contó en este navegador, solo mostramos el valor
+            fetch(GET_URL)
+                .then(res => res.json())
+                .then(data => {
+                    if (data && typeof data.value !== 'undefined') show(data.value);
+                    else show(localStorage.getItem(STORAGE_KEY + '_last') || '0');
+                })
+                .catch(() => show(localStorage.getItem(STORAGE_KEY + '_last') || '0'));
+        } else {
+            // Primera visita desde este navegador → incrementa
+            fetch(HIT_URL)
+                .then(res => res.json())
+                .then(data => {
+                    if (data && typeof data.value !== 'undefined') {
+                        show(data.value);
+                        localStorage.setItem(STORAGE_KEY, '1');
+                        localStorage.setItem(STORAGE_KEY + '_last', data.value);
+                    }
+                })
+                .catch(() => {
+                    let fallback = Number(localStorage.getItem(STORAGE_KEY + '_last') || 0) + 1;
+                    localStorage.setItem(STORAGE_KEY + '_last', fallback);
+                    localStorage.setItem(STORAGE_KEY, '1');
+                    show(fallback);
+                });
+        }
+    })();
     </script>
 </body>
 </html>
