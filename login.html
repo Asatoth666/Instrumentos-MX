@@ -23,6 +23,189 @@
         <p>¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a></p>
         <p><a href="recuperar.html">¿Olvidaste tu contraseña?</a></p> <p><a href="index.html" class="btn-secundario">Volver al inicio</a></p> </div> </body>
     </div>
-</body>
+    <div class="chatbot-container" id="chatbot">
+  <div class="chatbot-header">
+    <span>🤖 Chatbot - InstrumentosMX</span>
+    <button onclick="cerrarChatbot()">✖</button>
+  </div>
 
+  <div class="chatbot-body" id="chatbot-body">
+    <div class="mensaje-bot">¡Hola! 👋 Soy tu asistente de InstrumentosMX. ¿Quieres ayuda para elegir un instrumento o conocer promociones?</div>
+  </div>
+
+  <div class="chatbot-input">
+    <input type="text" id="userMessage" placeholder="Escribe tu mensaje..." onkeydown="if(event.key==='Enter') enviarMensaje()">
+    <button onclick="enviarMensaje()">Enviar</button>
+  </div>
+</div>
+
+<!-- Botón flotante -->
+<button id="chatbot-toggle" onclick="abrirChatbot()">💬</button>
+<style>
+  /* 💬 Estilos del chatbot */
+  #chatbot-toggle {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: 0.3s;
+  }
+  #chatbot-toggle:hover {
+    background-color: #ff8533;
+    transform: scale(1.1);
+  }
+
+  .chatbot-container {
+    position: fixed;
+    bottom: 90px;
+    right: 25px;
+    width: 320px;
+    height: 420px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .chatbot-header {
+    background: #222;
+    color: #fff;
+    padding: 10px 15px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .chatbot-body {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    background: #f9f9f9;
+  }
+
+  .mensaje-bot, .mensaje-user {
+    margin: 8px 0;
+    padding: 10px 12px;
+    border-radius: 12px;
+    max-width: 80%;
+    word-wrap: break-word;
+  }
+
+  .mensaje-bot {
+    background-color: #222;
+    align-self: flex-start;
+  }
+
+  .mensaje-user {
+    background-color: #ffcc99;
+    align-self: flex-end;
+    margin-left: auto;
+  }
+
+  .chatbot-input {
+    display: flex;
+    border-top: 1px solid #ddd;
+  }
+
+  .chatbot-input input {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    font-size: 14px;
+    outline: none;
+  }
+
+  .chatbot-input button {
+    background: #ff6600;
+    color: white;
+    border: none;
+    padding: 0 15px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  @keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+</style>
+
+<script>
+  function abrirChatbot() {
+    document.getElementById("chatbot").style.display = "flex";
+    document.getElementById("chatbot-toggle").style.display = "none";
+  }
+
+  function cerrarChatbot() {
+    document.getElementById("chatbot").style.display = "none";
+    document.getElementById("chatbot-toggle").style.display = "block";
+  }
+
+  function enviarMensaje() {
+    const input = document.getElementById("userMessage");
+    const mensaje = input.value.trim();
+    if (mensaje === "") return;
+
+    const chatBody = document.getElementById("chatbot-body");
+
+    // Mensaje del usuario
+    const userMsg = document.createElement("div");
+    userMsg.className = "mensaje-user";
+    userMsg.textContent = mensaje;
+    chatBody.appendChild(userMsg);
+
+    input.value = "";
+    chatBody.scrollTop = chatBody.scrollHeight;
+
+    // Respuesta del bot con pequeña espera
+    setTimeout(() => {
+      const respuesta = obtenerRespuesta(mensaje.toLowerCase());
+      const botMsg = document.createElement("div");
+      botMsg.className = "mensaje-bot";
+      botMsg.textContent = respuesta;
+      chatBody.appendChild(botMsg);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }, 600);
+  }
+
+  function obtenerRespuesta(msg) {
+    // Respuestas inteligentes con palabras clave
+    if (msg.includes("hola") || msg.includes("buenas")) {
+      return "¡Hola! 🎸 ¿Buscas algún tipo de instrumento en especial?";
+    } else if (msg.includes("guitarra")) {
+      return "Tenemos guitarras acústicas y eléctricas. 🎶 Puedes verlas en la sección de Productos → Guitarras.";
+    } else if (msg.includes("bajo")) {
+      return "Los bajos más populares están disponibles con envío gratis 🎸 Visita Productos → Bajos.";
+    } else if (msg.includes("batería") || msg.includes("bateria")) {
+      return "🥁 ¡Tenemos baterías acústicas y electrónicas! Visita la sección de Productos para más detalles.";
+    } else if (msg.includes("teclado") || msg.includes("piano")) {
+      return "🎹 Contamos con teclados y pianos digitales para principiantes y profesionales.";
+    } else if (msg.includes("violín") || msg.includes("violin")) {
+      return "🎻 Nuestros violines son importados con garantía. Puedes verlos en la sección de Productos → Violines.";
+    } else if (msg.includes("promocion") || msg.includes("oferta")) {
+      return "🔥 Actualmente tenemos descuentos en guitarras eléctricas y pianos digitales. ¡Aprovecha!";
+    } else if (msg.includes("contacto") || msg.includes("ayuda")) {
+      return "📞 Puedes comunicarte con nosotros desde la sección 'Contacto' o enviarnos un mensaje en redes sociales.";
+    } else if (msg.includes("gracias") || msg.includes("adiós") || msg.includes("bye")) {
+      return "¡Gracias a ti! 😊 ¡Vuelve pronto a InstrumentosMX!";
+    } else {
+      return "No estoy seguro de entender 😅. Puedes preguntar por guitarras, bajos, baterías o promociones.";
+    }
+  }
+</script>
+</body>
+</body>
 </html>
