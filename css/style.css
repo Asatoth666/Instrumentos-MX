@@ -7,8 +7,8 @@
 }
 
 body {
-    background: #121212;
-    color: #e0e0e0;
+    background: #F5EFE6; /* Fondo claro tipo madera clara */
+    color: #3C2F2F; /* Texto marrón oscuro */
     line-height: 1.6;
 }
 
@@ -18,8 +18,8 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background: #1f1f1f;
-    color: #fff;
+    background: #A97456; /* Madera media */
+    color: #FFF8F0;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -28,6 +28,7 @@ header {
 header .logo {
     font-size: 1.5em;
     font-weight: bold;
+    color: #FFF8F0;
 }
 
 header nav ul {
@@ -37,24 +38,24 @@ header nav ul {
 }
 
 header nav a {
-    color: #e0e0e0;
+    color: #FFF8F0;
     text-decoration: none;
     transition: 0.3s;
 }
 
 header nav a:hover {
-    color: #f4a261;
+    color: #D2A679;
 }
 
 /* Hero */
 .hero {
-    height: 80vh;
+    height: 90vh;
     background: url("../img/hero.jpg") center/cover no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    color: #fff;
+    color: #FFF8F0;
     position: relative;
 }
 
@@ -65,7 +66,7 @@ header nav a:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(92, 58, 33, 0.6); /* filtro marrón oscuro */
 }
 
 .hero-text {
@@ -81,14 +82,14 @@ header nav a:hover {
 .hero-text p {
     margin-bottom: 20px;
     font-size: 1.2em;
-    color: #ddd;
+    color: #F5EFE6;
 }
 
 .btn {
     display: inline-block;
     padding: 12px 25px;
-    background: #f4a261;
-    color: #fff;
+    background: #A97456;
+    color: #FFF8F0;
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
@@ -96,34 +97,34 @@ header nav a:hover {
 }
 
 .btn:hover {
-    background: #e76f51;
+    background: #D2A679;
 }
 
 /* Sección destacados */
 .destacados {
-    padding: 50px 20px;
+    padding: 60px 20px;
     text-align: center;
-    background: #181818;
+    background: #F5EFE6;
 }
 
 .destacados h2 {
     margin-bottom: 30px;
     font-size: 2em;
-    color: #f4a261;
+    color: #5C3A21;
 }
 
 .cards {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 25px;
     flex-wrap: wrap;
 }
 
 .card {
-    background: #1f1f1f;
+    background: #D2A679;
     padding: 15px;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 5px 15px rgba(60, 47, 47, 0.3);
     transition: transform 0.3s;
     width: 250px;
 }
@@ -131,11 +132,12 @@ header nav a:hover {
 .card img {
     width: 100%;
     border-radius: 10px;
+    border: 2px solid #A97456;
 }
 
 .card h3 {
     margin-top: 15px;
-    color: #fff;
+    color: #3C2F2F;
 }
 
 .card:hover {
@@ -144,31 +146,31 @@ header nav a:hover {
 
 /* Footer */
 footer {
-    background: #1f1f1f;
-    color: #aaa;
+    background: #5C3A21;
+    color: #FFF8F0;
     text-align: center;
     padding: 20px;
     margin-top: 40px;
     font-size: 0.9em;
 }
 
-/* Estilos para Login y Registro en tema oscuro */
+/* Login / Registro */
 .login-container,
 .register-container {
     max-width: 400px;
     margin: 80px auto;
     padding: 30px;
-    background: #1f1f1f;
+    background: #D2A679;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 4px 15px rgba(60, 47, 47, 0.5);
     text-align: center;
-    color: #e0e0e0;
+    color: #3C2F2F;
 }
 
 .login-container h2,
 .register-container h2 {
     margin-bottom: 20px;
-    color: #f4a261;
+    color: #5C3A21;
 }
 
 form {
@@ -180,41 +182,41 @@ form {
 form label {
     text-align: left;
     font-weight: bold;
-    color: #ddd;
+    color: #3C2F2F;
 }
 
 form input {
     padding: 10px;
-    border: 1px solid #444;
+    border: 1px solid #A97456;
     border-radius: 5px;
-    background: #2b2b2b;
-    color: #fff;
+    background: #FFF8F0;
+    color: #3C2F2F;
 }
 
 form input:focus {
-    border-color: #f4a261;
+    border-color: #5C3A21;
     outline: none;
 }
 
 form .btn {
-    background: #f4a261;
+    background: #A97456;
     border: none;
     cursor: pointer;
-    transition: 0.3s;
 }
 
 form .btn:hover {
-    background: #e76f51;
+    background: #5C3A21;
+    color: #FFF8F0;
 }
 
 p {
     margin-top: 15px;
     font-size: 0.9em;
-    color: #bbb;
+    color: #3C2F2F;
 }
 
 p a {
-    color: #f4a261;
+    color: #A97456;
     text-decoration: none;
 }
 
@@ -222,61 +224,7 @@ p a:hover {
     text-decoration: underline;
 }
 
-/* Hero con video o imagen */
-.hero {
-    position: relative;
-    width: 100%;
-    height: 100vh; /* ocupa toda la pantalla */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: #fff;
-    overflow: hidden;
-}
-.hero-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* el video se adapta */
-    z-index: -1;
-}
-.hero .overlay {
-    position: relative;
-    z-index: 2;
-    background: rgba(0, 0, 0, 0.5); /* oscurece */
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 800px;
-}
-.hero::after,
-.hero::before {
-    content: none;
-}
-.destacados {
-    position: relative;
-    z-index: 3;
-    background: #181818;
-    padding: 80px 20px;
-    text-align: center;
-    color: #e0e0e0;
-}
-
-.precio {
-  font-weight: bold;
-  color: #f4a261; /* resalta con tu paleta */
-  margin: 10px 0;
-}
-
-.producto img {
-    width: 100%;
-    height: 200px; /* tamaño fijo para todas */
-    object-fit: cover; /* recorta sin deformar */
-    border-radius: 10px; /* opcional: esquinas redondeadas */
-}
-
+/* Catálogo */
 .catalogo {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -285,7 +233,7 @@ p a:hover {
 }
 
 .producto {
-    background: #fff;
+    background: #FFF8F0;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     padding: 15px;
@@ -297,17 +245,27 @@ p a:hover {
     transform: scale(1.05);
 }
 
+.producto img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid #D2A679;
+}
+
 .producto h3 {
     margin: 10px 0 5px;
     font-size: 1.2em;
+    color: #3C2F2F;
 }
 
-.producto p {
-    font-size: 0.9em;
-    color: #555;
+.precio {
+  font-weight: bold;
+  color: #5C3A21;
+  margin: 10px 0;
 }
 
-/* Estilo llamativo del contador */
+/* Contador */
 .contador-container {
   text-align: center;
   margin-top: 15px;
@@ -316,7 +274,7 @@ p a:hover {
 
 .contador-container p {
   font-size: 18px;
-  color: #f4a261;
+  color: #5C3A21;
   margin-bottom: 8px;
 }
 
@@ -324,17 +282,17 @@ p a:hover {
   display: inline-block;
   font-size: 36px;
   font-weight: bold;
-  color: #fff;
-  background: linear-gradient(135deg, #ff5f6d, #ffc371);
+  color: #FFF8F0;
+  background: linear-gradient(135deg, #A97456, #D2A679);
   padding: 12px 25px;
   border-radius: 12px;
-  box-shadow: 0px 5px 15px rgba(0,0,0,0.4);
+  box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
   animation: pulse 1.5s infinite;
 }
 
 @keyframes pulse {
   0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
+  50% { transform: scale(1.05); }
   100% { transform: scale(1); }
 }
 
