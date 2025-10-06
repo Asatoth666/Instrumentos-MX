@@ -49,56 +49,56 @@ header nav a:hover {
 
 /* Hero */
 .hero {
-    height: 90vh;
-    background: url("../img/hero.jpg") center/cover no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: #FFF8F0;
-    position: relative;
+  height: 90vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  transition: background-image 1.5s ease-in-out; /* Transición suave */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.hero::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(92, 58, 33, 0.6); /* filtro marrón oscuro */
+/* Cuadro semitransparente del texto */
+.hero-content {
+  background: rgba(92, 58, 33, 0.65); /* Café semitransparente */
+  color: #ffffff;
+  text-align: center;
+  padding: 40px 60px;
+  border-radius: 15px;
+  backdrop-filter: blur(3px);
 }
 
-.hero-text {
-    position: relative;
-    z-index: 1;
+.hero-content h1 {
+  font-size: 3em;
+  margin-bottom: 15px;
+  font-weight: bold;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-.hero-text h1 {
-    font-size: 3em;
-    margin-bottom: 15px;
-}
-
-.hero-text p {
-    margin-bottom: 20px;
-    font-size: 1.2em;
-    color: #F5EFE6;
+.hero-content p {
+  font-size: 1.3em;
+  margin-bottom: 25px;
+  color: #fff;
 }
 
 .btn {
-    display: inline-block;
-    padding: 12px 25px;
-    background: #A97456;
-    color: #FFF8F0;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: 0.3s;
+  display: inline-block;
+  padding: 12px 25px;
+  background: #A97456;
+  color: #FFF8F0;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.2s;
 }
 
 .btn:hover {
-    background: #D2A679;
+  background: #D2A679;
+  transform: scale(1.05);
 }
+
 
 /* Sección destacados */
 .destacados {
@@ -295,4 +295,5 @@ p a:hover {
   50% { transform: scale(1.05); }
   100% { transform: scale(1); }
 }
+
 
