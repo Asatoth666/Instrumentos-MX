@@ -54,7 +54,7 @@ session_start();
                 <h3>Bajos</h3>
             </a>
             <a href="productos.php?categoria=Baterias" class="card">
-                <img src="img/photo-1573339887531-4b092b198f3a.jpeg" alt="Baterías">
+                <img src="img/bateria.jpg" alt="Baterías">
                 <h3>Baterías</h3>
             </a>
             <a href="productos.php?categoria=Teclados/Pianos" class="card">
@@ -119,3 +119,4 @@ session_start();
     </script>
 </body>
 </html>
+
