@@ -62,7 +62,7 @@ session_start();
                 <h3>Teclados/Pianos</h3>
             </a>
             <a href="productos.php?categoria=Violines" class="card">
-                <img src="img/46010b2ebb50a7da6455b47505cc9811.jpg" alt="Violín">
+                <img src="img/violin1.jpg" alt="Violín">
                 <h3>Violines</h3>
             </a>
         </div>
@@ -119,5 +119,6 @@ session_start();
     </script>
 </body>
 </html>
+
 
 
