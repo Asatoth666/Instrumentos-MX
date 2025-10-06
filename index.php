@@ -88,37 +88,36 @@ session_start();
         <p>Visitas: <span id="contador-visitas">0</span></p>
     </footer>
 
-    <script>
-        const hero = document.querySelector('.hero');
-        const images = [
-            'img/ecenario.jpg',
-            'img/guitarraacus.jpg',
-            'img/guitarraelect.jpg',
-            'img/bateria.jpg',
-            'img/piano.jpg',
-            'img/violin.jpg',
-        ];
+   <script>
+  const hero = document.querySelector('.hero');
+  const images = [
+    'img/ecenario.jpg',
+    'img/guitarraacus.jpg',
+    'img/guitarraelect.jpg',
+    'img/bateria.jpg',
+    'img/piano.jpg',
+    'img/violin.jpg'
+  ];
 
-        let current = 0;
+  // Cambiar imagen aleatoriamente con transición suave
+  function changeBackground() {
+    const randomIndex = Math.floor(Math.random() * images.length);
+    const newImage = `url(${images[randomIndex]})`;
+    hero.style.opacity = 0;
+    setTimeout(() => {
+      hero.style.backgroundImage = newImage;
+      hero.style.opacity = 1;
+    }, 800);
+  }
 
-        function changeBackground() {
-            hero.style.backgroundImage = `url(${images[current]})`;
-            current = (current + 1) % images.length;
-        }
+  hero.style.transition = "opacity 1.2s ease-in-out, background-image 1.2s ease-in-out";
+  changeBackground();
+  setInterval(changeBackground, 6000); // cada 6 segundos
+</script>
 
-        // Cambia cada 5 segundos
-        changeBackground();
-        setInterval(changeBackground, 5000);
-
-        // Contador de visitas
-        const contadorVisitas = document.getElementById('contador-visitas');
-        let visitas = localStorage.getItem('visitas') || 0;
-        visitas++;
-        localStorage.setItem('visitas', visitas);
-        contadorVisitas.textContent = visitas;
-    </script>
 </body>
 </html>
+
 
 
 
