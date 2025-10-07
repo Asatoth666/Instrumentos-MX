@@ -23,13 +23,13 @@
 </header>
 
 
-   <section class="hero">
-  <div class="hero-content">
-    <h1>Encuentra tu sonido</h1>
-    <p>Instrumentos de calidad al alcance de todos</p>
-    <a href="productos.php" class="btn">Explorar Productos</a>
-  </div>
-</section>
+    <section class="hero">
+        <div class="overlay">
+            <h1>Encuentra tu sonido</h1>
+            <p>Instrumentos de calidad al alcance de todos</p>
+            <a href="#" class="btn" onclick="event.preventDefault()">Explorar Productos</a>
+        </div>
+    </section>
 
     <section class="destacados">
         <h2>Productos Destacados</h2>
@@ -43,7 +43,7 @@
                 <h3>Bajos</h3>
             </a>
             <a href="#" class="card" onclick="event.preventDefault()">
-                <img src="img/bateria.jpg" alt="Baterías">
+                <img src="img/photo-1573339887531-4b092b198f3a.jpeg" alt="Baterías">
                 <h3>Baterías</h3>
             </a>
             <a href="#" class="card" onclick="event.preventDefault()">
@@ -51,7 +51,7 @@
                 <h3>Teclados/Pianos</h3>
             </a>
             <a href="#" class="card" onclick="event.preventDefault()">
-                <img src="img/violin1.jpg" alt="Violín">
+                <img src="img/46010b2ebb50a7da6455b47505cc9811.jpg" alt="Violín">
                 <h3>Violines</h3>
             </a>
         </div>
@@ -169,15 +169,15 @@
   /* 💬 Estilos del chatbot */
   #chatbot-toggle {
     position: fixed;
-    bottom: 25px;
+    bottom: 40px;
     right: 25px;
     background-color: #ff6600;
     color: white;
     border: none;
     border-radius: 50%;
     font-size: 24px;
-    width: 60px;
-    height: 60px;
+    width: 100px;
+    height: 100px;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     transition: 0.3s;
@@ -234,14 +234,14 @@
   }
 
   .mensaje-user {
-    background-color: #ffcc99;
+    background-color: #ff8533;
     align-self: flex-end;
     margin-left: auto;
   }
 
   .chatbot-input {
     display: flex;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid #000000;
   }
 
   .chatbot-input input {
@@ -332,6 +332,3 @@
 </script>
 </body>
 </html>
-
-
-
